@@ -35,6 +35,46 @@ class ProductController extends Controller
 
 
     }
+    public function show(Product $product){
 
 
+
+        return view('product.show', compact('product'));
+
+    }
+    public function destroy ($id){
+
+        $product = Product::find($id);
+ 
+        $product->delete();
+ 
+        return redirect()->route('product.index');
+ 
+     }
+ 
+ 
+ 
+     public function edit($id){//Encuentro el Curso
+ 
+         $product = Product::find($id);
+ 
+         return view('product.edit',compact('product'));
+ 
+       }
+       public function update(Request $request,$id){
+ 
+ 
+         $product = Product::find($id);
+ 
+         $product ->name = $request->name;
+         $product ->description = $request->description;
+         $product ->price = $request->price;
+ 
+        
+         $product->save();
+ 
+         return redirect()->route('product.index');
+ 
+
+}
 }

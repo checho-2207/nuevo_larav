@@ -7,7 +7,43 @@
 </head>
 <body>
 
-    {{$products}}
+    <table id="idPqrsd" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+          @foreach ($products as $product)
+              <tr>
+                  <td>{{$product->id}}</td>
+                  <td>{{$product->name}}</td>
+                  <td>{{$product->description}}</td>
+                  <td>{{$product->price}}</td>
+
+                  <td><a href="{{route('product.show',$product->id)}}">Mostrar</a></td>
+
+                  <td><a href="{{route('product.edit',$product->id)}}">Editar</a></td>
+                  <td>
+                  <form action="{{route('product.destroy',$product->id)}}" method="POST">
+                      @csrf
+                      @method('delete')
+                    <button type="submit">Eliminar</button>
+                  </form>
+                  <br>
+                 </td>
+
+
+
+
+              </tr>
+          @endforeach
+        </tbody>
+
+    </table>
 
 
 </body>
